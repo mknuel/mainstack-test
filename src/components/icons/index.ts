@@ -1,0 +1,10 @@
+export { default as HomeIcon } from "./HomeIcon";
+export { default as AnalyticsIcon } from "./AnalyticsIcon";
+export { default as CrmIcon } from "./CrmIcon";
+export { default as RevenueIcon } from "./RevenueIcon";
+export { default as AppsIcon } from "./AppsIcon";
+export { default as MessageIcon } from "./MessageIcon";
+export { default as NotificationIcon } from "./NotificationIcon";
+export { default as AlertIcon } from "./AlertIcon";
+export { default as ArrowDownIcon } from "./ArrowDownIcon";
+export { default as DownloadIcon } from "./DownloadIcon";
