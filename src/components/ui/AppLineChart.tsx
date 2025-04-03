@@ -1,16 +1,14 @@
-import React from "react";
-import moment from "moment";
 import {
 	LineChart,
 	Line,
 	XAxis,
 	YAxis,
-	CartesianGrid,
 	Tooltip,
 	ResponsiveContainer,
-	Dot,
 } from "recharts";
 import { Box, Text } from "@chakra-ui/react";
+import { formatCurrency } from "@/utils";
+import AppSkeletonLoader from "./AppSkelentonLoader";
 
 interface DataPoint {
 	date: string;
@@ -24,16 +22,13 @@ interface LineChartProps {
 	defaultValue?: DataPoint[];
 }
 
-const defaultData = [
-	{ date: moment(new Date()).format("MMM D, YYYY"), value: 0 },
-];
-
 function LineChartSkeleton() {
-	return <Box height="250px" width="100%" overflow="hidden" />;
+	return <AppSkeletonLoader height="100%" width="100%" />;
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
 	if (active && payload && payload.length) {
+		console.log(payload);
 		return (
 			<Box
 				bg="white"
@@ -49,10 +44,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 					alignItems="center"
 					justifyContent="space-between">
 					<Box display="flex" alignItems="center" gap={2} color="#FF5403">
-						<Box height={2} width={2} borderRadius="full" bg="#FF5403" />
-						<Text>API Calls</Text>
+						<Box height={2} mr={2} width={2} borderRadius="full" bg="#FF5403" />
+						{/* <Text></Text> */}
 					</Box>
-					<Text fontWeight="medium">{payload[0]?.value ?? 0}</Text>
+					<Text fontWeight="medium">
+						{formatCurrency(payload[0]?.value ?? 0)}
+					</Text>
 				</Box>
 			</Box>
 		);
@@ -62,7 +59,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export function AppLineChart({
 	data,
-	defaultValue = defaultData,
+	defaultValue,
 	type = "days",
 	loading = false,
 }: LineChartProps) {
@@ -70,7 +67,6 @@ export function AppLineChart({
 		!data ||
 		data?.length < 1 ||
 		data.every((item: DataPoint) => item.value < 1);
-
 	if (loading) {
 		return <LineChartSkeleton />;
 	}
@@ -90,8 +86,8 @@ export function AppLineChart({
 					axisLine={{ stroke: "#DBDEE5" }}
 					tickLine={false}
 					ticks={[
-						formattedData[0]?.date,
-						formattedData[formattedData.length - 1]?.date,
+						formattedData?.[0]?.date || "",
+						formattedData?.[formattedData.length - 1]?.date || "",
 					]} // Show only first and last date
 				/>
 				<YAxis hide />

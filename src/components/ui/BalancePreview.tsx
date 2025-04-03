@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+import { HStack, Text, VStack } from "@chakra-ui/react";
 import AppTooltip from "./AppTooltip";
 import { Icon, IconProps } from "@chakra-ui/react";
+import { formatCurrency } from "@/utils";
 
 const AlertIcon = (props: IconProps) => {
 	return (
@@ -21,14 +21,25 @@ const AlertIcon = (props: IconProps) => {
 	);
 };
 
-export default function BalancePreview() {
+type BalancePreviewProps = {
+	label: string;
+	description?: string;
+	amount: number | undefined;
+	tooltip?: boolean;
+};
+
+export default function BalancePreview({
+	label = "",
+	description = "This is the tooltip content",
+	amount = 0,
+}: BalancePreviewProps) {
 	return (
 		<VStack color={"#56616B"} fontSize={"sm"} w="full">
 			<HStack justify={"space-between"} w="full">
-				<Text>Ledger Balance</Text>
+				<Text>{label}</Text>
 				<AppTooltip
 					showArrow
-					content="This is the tooltip content"
+					content={description}
 					contentProps={{ css: { "--tooltip-bg": "#fff", color: "#56616b" } }}>
 					<AlertIcon />
 				</AppTooltip>
@@ -39,7 +50,7 @@ export default function BalancePreview() {
 				fontWeight={"bold"}
 				color={"#131316"}
 				w="full">
-				USD 175,580.00
+				{formatCurrency(amount)}
 			</Text>
 		</VStack>
 	);

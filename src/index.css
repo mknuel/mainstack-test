@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 @font-face {
 	font-family: "Degular Display";
 	src: url("/assets/font/Degular/DegularDisplay-Regular.woff2") format("woff2");
@@ -70,3 +75,4 @@ html,
 body {
 	font-family: "Degular Display";
 }
+

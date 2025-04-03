@@ -1,0 +1,117 @@
+/* Root container dimensions */
+.root {
+	width: 345px;
+	/* height: 286px; */
+	max-width: none;
+}
+
+/* Month grid size */
+.month_grid {
+	width: 345px;
+	/* height: 286px; */
+	gap: 0;
+}
+
+/* Caption container (month/year) */
+.caption_container {
+	flex-grow: 1;
+	text-align: center;
+}
+
+/* Caption label styling */
+.caption_label {
+	font-size: 13.5px;
+	font-weight: 500;
+	justify-content: center;
+	width: 100%;
+	font-weight: 600;
+}
+
+/* Navigation bar */
+.nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 0.75rem;
+	z-index: 2;
+}
+
+/* Caption container */
+.caption_container {
+	flex-grow: 1;
+	text-align: center;
+}
+
+/* Caption label styling */
+.caption_label {
+	font-size: 13.5px;
+	font-weight: 600;
+	width: 100%;
+}
+
+/* Navigation buttons */
+.button_previous,
+.button_next {
+	position: relative;
+	width: 2rem;
+	height: 2rem;
+	cursor: pointer;
+}
+
+/* Chevron icon positioning */
+.chevron {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0.75rem;
+	height: 0.75rem;
+	transform: translate(-50%, -50%);
+}
+
+/* Weekday header cells */
+.weekday {
+	width: calc(100% / 7);
+	padding: 0.5rem 0;
+	color: #56616b;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+/* Day cells */
+.day {
+	width: 2rem;
+	height: 2rem;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 0;
+}
+
+/* Day buttons */
+.day_button {
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	transition: background-color ease-in-out 0.1s;
+}
+
+/* Selected day styling */
+.selected {
+	background-color: #131316;
+	border-radius: 50%;
+	color: white;
+}
+
+.selected:hover {
+	background-color: #131316;
+}
+
+.today .day_button {
+	border: 1px solid #56616b;
+	border-radius: 50%;
+	color: #56616b;
+}

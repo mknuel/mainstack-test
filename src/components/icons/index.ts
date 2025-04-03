@@ -8,3 +8,4 @@ export { default as NotificationIcon } from "./NotificationIcon";
 export { default as AlertIcon } from "./AlertIcon";
 export { default as ArrowDownIcon } from "./ArrowDownIcon";
 export { default as DownloadIcon } from "./DownloadIcon";
+export { default as MenuIcon } from "./MenuIcon";

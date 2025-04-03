@@ -1,0 +1,64 @@
+.rdp {
+  --rdp-accent-color: #131316!important;
+  --rdp-accent-background-color: #131316!important;
+  --rdp-selected-border: none;
+}
+
+
+
+/* Center the month header and position the arrows */
+.rdp-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+/* Position arrows on either side */
+.rdp-nav {
+  /* position: absolute; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Style days of the week */
+.rdp-weekday {
+  color: #56616B;
+  font-weight: 500;
+}
+
+/* Style regular days */
+.rdp-day {
+  color: #131316;
+  padding: 1rem;
+}
+
+/* Style selected day (white text) */
+.rdp-day_selected {
+  color: white;
+  background-color: #131316;
+  border: none;
+  border-radius: 50%;
+}
+
+/* Add proper spacing */
+.rdp-months {
+  gap: 1rem;
+}
+
+.rdp-month {
+  border-spacing: 1rem;
+}
+
+.rdp-table {
+  margin: 0.5rem 0;
+}
+
+/* Override any hover effects to maintain consistency */
+.rdp-day_selected:hover {
+  background-color: #131316 !important;
+  color: white;
+}

@@ -1,10 +1,19 @@
 import React from "react";
-import { Box, Flex, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import {
+	Box,
+	Flex,
+	HStack,
+	Icon,
+	Skeleton,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 import { ITransaction } from "@/types";
 import moment from "moment";
 
 interface TransactionProps {
 	transaction: ITransaction;
+	isLoading?: boolean;
 }
 
 const statusColors = {
@@ -14,9 +23,35 @@ const statusColors = {
 	default: "#131316",
 };
 
+export const TransactionSkeletonLoader = () => {
+	return (
+		<Flex justifyContent={"space-between"} w="full">
+			<HStack gap={3} w="full">
+				{/* Icon Skeleton */}
+				<Skeleton width="49px" height="49px" borderRadius="full" />
+
+				{/* Text Content Skeleton */}
+				<VStack
+					justifyContent={"space-between"}
+					w="full"
+					alignItems="flex-start">
+					<Skeleton height="16px" width="150px" />
+					<Skeleton height="14px" width="80px" />
+				</VStack>
+			</HStack>
+
+			{/* Right side amount and date */}
+			<Box>
+				<Skeleton height="16px" width="100px" mb={2} />
+				<Skeleton height="14px" width="80px" />
+			</Box>
+		</Flex>
+	);
+};
+
 const CreditIcon = () => {
 	return (
-		<Icon>
+		<Icon data-testid="credit-icon">
 			<svg
 				width="49"
 				height="49"
@@ -47,7 +82,7 @@ const CreditIcon = () => {
 
 const DebitIcon = () => {
 	return (
-		<Icon>
+		<Icon data-testid="debit-icon">
 			<svg
 				width="49"
 				height="49"
@@ -76,7 +111,14 @@ const DebitIcon = () => {
 	);
 };
 
-const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
+const Transaction: React.FC<TransactionProps> = ({
+	transaction,
+	isLoading = false,
+}) => {
+	if (isLoading) {
+		return <TransactionSkeletonLoader />;
+	}
+
 	return (
 		<Flex
 			color={"#131316"}
@@ -84,17 +126,25 @@ const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
 			justifyContent={"space-between"}
 			w="full">
 			<HStack gap={3}>
-				{transaction.type === "credit" ? <CreditIcon /> : <DebitIcon />}
+				{transaction.type === "deposit" ? <CreditIcon /> : <DebitIcon />}
 				<VStack
 					justifyContent={"space-between"}
 					w="full"
 					alignItems="flex-start">
-					<Text>{transaction?.title}</Text>
+					<Text>{transaction?.metadata?.product_name || "_"}</Text>
 					<Text
 						fontSize={"sm"}
-						color={statusColors[transaction?.status] || statusColors.default}
+						color={
+							transaction?.status === "pending"
+								? statusColors.pending
+								: transaction?.status === "success"
+								? statusColors.success
+								: transaction?.status === "failed"
+								? statusColors.failed
+								: statusColors.default
+						}
 						w="full">
-						{transaction?.subtitle}
+						{transaction?.status}
 					</Text>
 				</VStack>
 			</HStack>
